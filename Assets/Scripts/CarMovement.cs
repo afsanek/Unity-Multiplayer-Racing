@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-public class CarMovement : NetworkBehaviour
+public class CarMovement : MonoBehaviour
 {
     //private float _currentBrakeForce;
     private float _currentSteeringAngle;
@@ -23,17 +23,10 @@ public class CarMovement : NetworkBehaviour
     private const string Horizontal = "Horizontal";
     private const string Vertical = "Vertical";
 
-    public override void OnStartLocalPlayer()
-    {
-        base.OnStartLocalPlayer();
-        if (!(Camera.main is null)) Camera.main.GetComponent<FollowCar>().SetCar(gameObject.transform);
-    }
+    
+    //better to use late update here and in camera to avoid jitter
     private void FixedUpdate()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
         GetInput();
         HandleMotor();
         HandleSteering();
