@@ -702,7 +702,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ab035d7682921704a9015ac353311d57, type: 2}
+  - {fileID: 2100000, guid: 07f44fe3e9c462146a7769b976c50ec4, type: 2}
   - {fileID: 2100000, guid: ab035d7682921704a9015ac353311d57, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -751,7 +751,6 @@ GameObject:
   - component: {fileID: 1592354230526639827}
   - component: {fileID: -2066444818531777021}
   - component: {fileID: 6902462530194916658}
-  - component: {fileID: 1699710495}
   - component: {fileID: 934761991}
   m_Layer: 0
   m_Name: BlueCar
@@ -768,7 +767,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6462220882448896044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.44, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6464974066533965766}
@@ -819,6 +818,7 @@ MonoBehaviour:
   motorForce: 500
   brakeForce: 1500
   maxSteeringAngle: 30
+  maxSpeed: 150
 --- !u!114 &-2066444818531777021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -874,21 +874,6 @@ MonoBehaviour:
   m_SnapThreshold: 7
   m_InterpolateRotation: 1
   m_InterpolateMovement: 2
---- !u!114 &1699710495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6462220882448896044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 958f5038a8a37fa4c905ff39d0d6c430, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerName: 
-  playerColor: {r: 0, g: 0, b: 0, a: 0}
-  currLap: 0
 --- !u!114 &934761991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,21 +886,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5a2c21cd569d948a480b793d549685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carColors:
-  - mesh: {fileID: 4300002, guid: 1f768f0d5a5dc9e48941608a2f58f511, type: 3}
-    color: 2
-  - mesh: {fileID: 4300002, guid: 09f57a5ba9f33584a8118fed10afd1a0, type: 3}
-    color: 1
-  - mesh: {fileID: 4300002, guid: f2845fe9efc6c254eb94d232be76ea51, type: 3}
-    color: 4
-  - mesh: {fileID: 4300002, guid: 89f34d6067f7736469b3740d4612eaf6, type: 3}
-    color: 0
-  - mesh: {fileID: 4300002, guid: 30aed299437d3c64aaf1214d48491023, type: 3}
-    color: 3
-  nameLabel: {fileID: 6300214568266029543}
+  Colors:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  meshes:
+  - {fileID: 4300002, guid: 09f57a5ba9f33584a8118fed10afd1a0, type: 3}
+  - {fileID: 4300002, guid: 89f34d6067f7736469b3740d4612eaf6, type: 3}
+  - {fileID: 4300002, guid: f2845fe9efc6c254eb94d232be76ea51, type: 3}
+  - {fileID: 4300002, guid: 1f768f0d5a5dc9e48941608a2f58f511, type: 3}
+  - {fileID: 4300002, guid: 30aed299437d3c64aaf1214d48491023, type: 3}
+  Handlers:
+  - {fileID: 21300000, guid: 72c5458f2a06c4346b98cbae7ad7e398, type: 3}
+  - {fileID: 21300000, guid: 7ac1abfc14d16b34db1b2f8e305d1b50, type: 3}
+  - {fileID: 21300000, guid: 6af8d7e226f07f74ea65a439a37a3593, type: 3}
+  - {fileID: 21300000, guid: 6a5ab704d49d30040928e9958f39f235, type: 3}
+  - {fileID: 21300000, guid: b600b09ff42e0554a80eca5bbbb28f83, type: 3}
   mesh: {fileID: 6475346628024831744}
+  playerColorInput: {r: 0, g: 0, b: 0, a: 0}
+  nameLabel: {fileID: 6300214568266029543}
   playerNameInput: 
-  playerColorInput: 
+  playerHolder: {fileID: 6946148811511515916, guid: 77aea02f8e0bd5c419bb8f3c160ad903,
+    type: 3}
+  handler: {fileID: 3773369998675252675, guid: 8f37a77f7183e424392f0ae6fda8ef85, type: 3}
+  gatesTransforms: []
+  currLap: 0
 --- !u!1 &7645486493619864715
 GameObject:
   m_ObjectHideFlags: 0

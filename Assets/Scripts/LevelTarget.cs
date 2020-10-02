@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public enum GameType
 {
@@ -10,23 +9,25 @@ public enum GameType
     TimerMode,
     TrainingMode
 }
-public class LevelTarget : NetworkBehaviour
+public class LevelTarget : MonoBehaviour
 {
-    public static LevelTarget target;
+    public static LevelTarget instance;
+
     [Header("Declaring game type")]
     public GameType gameType;
     public int totalLap;
-    public int totalTime;
 
     private void Awake()
     {
-        if (target == null)
+        if (instance == null)
         {
-            target = this;
+            instance = this;
         }
         else
         {
             Destroy(gameObject);
         }
     }
+
+    
 }

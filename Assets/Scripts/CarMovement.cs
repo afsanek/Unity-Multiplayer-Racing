@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Networking;
 
 public class CarMovement : MonoBehaviour
@@ -7,10 +8,12 @@ public class CarMovement : MonoBehaviour
     private float _currentSteeringAngle;
     private float _horizontalInput;
     private float _verticalInput;
+    private float _currentSpeed;
     private bool  _isBraking;
     private bool  _isDoneBraking;
     private bool  _isDrifting;
     private bool  _startOverAfterBrake;
+    private Rigidbody _rigidbody;
     
     //[0] right, [1] left of front. [2] right, [3] left of back
     [SerializeField] private WheelCollider[] wheelsColliders;
@@ -19,11 +22,16 @@ public class CarMovement : MonoBehaviour
     [SerializeField] private float motorForce;
     [SerializeField] private float brakeForce;
     [SerializeField] private float maxSteeringAngle;
+    [SerializeField] private float maxSpeed;
 
     private const string Horizontal = "Horizontal";
     private const string Vertical = "Vertical";
 
-    
+    private void Start()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
+
     //better to use late update here and in camera to avoid jitter
     private void FixedUpdate()
     {
@@ -43,8 +51,19 @@ public class CarMovement : MonoBehaviour
     }
     private void HandleMotor()
     {
-        wheelsColliders[0].motorTorque = _verticalInput * motorForce;
-        wheelsColliders[1].motorTorque = _verticalInput * motorForce;
+        _currentSpeed = _rigidbody.velocity.sqrMagnitude;
+        //print("Speed = "+_currentSpeed);
+        if (_currentSpeed < maxSpeed)
+        {
+            wheelsColliders[0].motorTorque = _verticalInput * motorForce;
+            wheelsColliders[1].motorTorque = _verticalInput * motorForce;
+        }
+        else
+        {
+            wheelsColliders[0].motorTorque = 0f;
+            wheelsColliders[1].motorTorque = 0f;
+        }
+        
         //_currentBrakeForce = _isBraking ? brakeForce : 0f;
         if (_isBraking)
         {
